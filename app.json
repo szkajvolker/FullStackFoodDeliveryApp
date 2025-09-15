@@ -39,6 +39,14 @@
             "backgroundColor": "#000000"
           }
         }
+      ],
+      [
+        "@sentry/react-native/expo",
+        {
+          "url": "https://sentry.io/",
+          "project": "ist_reactnative_food_ordering",
+          "organization": "jsm-glw"
+        }
       ]
     ],
     "experiments": {
