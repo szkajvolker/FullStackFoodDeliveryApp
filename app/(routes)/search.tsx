@@ -7,7 +7,6 @@ import { useLocalSearchParams } from "expo-router";
 import CartButton from "@/components/CartButton";
 import cn from "clsx";
 import MenuCard from "@/components/MenuCard";
-import { MenuItem } from "@/type";
 
 import Filter from "@/components/Filter";
 import SearchBar from "@/components/SearchBar";
@@ -33,7 +32,25 @@ const Search = () => {
           const isFirstRightColItem = index % 2 === 0;
           return (
             <View className={cn("flex-1 max-w-[48%]", !isFirstRightColItem ? "mt-10" : "mt-0")}>
-              <MenuCard item={item as MenuItem} />
+              <MenuCard
+                item={{
+                  $id: item.$id,
+                  $collectionId: item.$collectionId,
+                  $databaseId: item.$databaseId,
+                  $createdAt: item.$createdAt,
+                  $updatedAt: item.$updatedAt,
+                  $permissions: item.$permissions,
+                  $sequence: item.$sequence,
+                  name: item.name,
+                  price: item.price,
+                  image_url: item.image_url,
+                  description: item.description,
+                  rating: item.rating,
+                  calories: item.calories,
+                  protein: item.protein,
+                  type: item.type,
+                }}
+              />
             </View>
           );
         }}
@@ -53,7 +70,21 @@ const Search = () => {
               <CartButton />
             </View>
             <SearchBar />
-            <Filter categories={categories!} />
+            <Filter
+              categories={
+                categories?.map((cat) => ({
+                  $id: cat.$id,
+                  $collectionId: cat.$collectionId,
+                  $databaseId: cat.$databaseId,
+                  $createdAt: cat.$createdAt,
+                  $updatedAt: cat.$updatedAt,
+                  $permissions: cat.$permissions,
+                  $sequence: cat.$sequence,
+                  name: cat.name,
+                  description: cat.description,
+                })) ?? []
+              }
+            />
           </View>
         )}
         ListEmptyComponent={() => !loading && <Text>No results</Text>}

@@ -5,13 +5,13 @@ export const appwriteconfig = {
   endpoint: process.env.EXPO_PUBLIC_APPWRITE_ENDPOINT!,
   platform: "com.ist.foodordering",
   projectId: process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID!,
-  databaseId: "68c6ecff0002b4b35869",
-  bucketId: "68c8587e0028c8e00187",
-  userCollectionId: "68c70a7b000bfcc683f6",
-  categoriesCollectionId: "68c8241b00346b526287",
-  menuCollectionId: "68c854a80000458af652",
-  customizationsCollectionId: "68c856790027903d1043",
-  menuCustomizationsCollectionId: "68c85782001a6953548c",
+  databaseId: process.env.EXPO_PUBLIC_APPWRITE_DATABASE_ID!,
+  bucketId: process.env.EXPO_PUBLIC_APPWRITE_BUCKET_ID!,
+  userCollectionId: process.env.EXPO_PUBLIC_APPWRITE_USERCOLLECTION_ID!,
+  categoriesCollectionId: process.env.EXPO_PUBLIC_APPWRITE_CATEGORIESCOLLECTION_ID!,
+  menuCollectionId: process.env.EXPO_PUBLIC_APPWRITE_MENUCOLLECTION_ID!,
+  customizationsCollectionId: process.env.EXPO_PUBLIC_APPWRITE_CUSTOMIZATIONCOLELCTION_ID!,
+  menuCustomizationsCollectionId: process.env.EXPO_PUBLIC_APPWRITE_MENUCUSTOMIZATIONSCOLLECTION_ID!,
 };
 
 export const client = new Client();
@@ -56,6 +56,7 @@ export const createUser = async ({ email, password, name }: CreateUserParams) =>
 export const signIn = async ({ email, password }: SignInParams) => {
   try {
     const session = await account.createEmailPasswordSession(email, password);
+    return session;
   } catch (error) {
     throw new Error(error as string);
   }

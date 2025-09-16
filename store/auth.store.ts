@@ -30,7 +30,11 @@ const useAuthStore = create<AuthState>((set) => ({
     try {
       const user = await getCurrentUser();
 
-      if (user) set({ isAuthenticated: true, user: user as User });
+      if (user)
+        set({
+          isAuthenticated: true,
+          user: { name: user.name, email: user.email, avatar: user.avatar } as User,
+        });
       else set({ isAuthenticated: false, user: null });
     } catch (error) {
       console.log("fetchAuthenticatedUser error", error);
